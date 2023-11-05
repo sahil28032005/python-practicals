@@ -34,7 +34,7 @@ Node *insertAtTail(Node *head, int data)
         }
         //  cout<<head->data<< endl;
         head->next = node;
-    }
+        }
 }
 void traverseList(Node *head)
 {
@@ -139,7 +139,7 @@ int main()
     cout << "after sortings..." << endl;
     sortLinkedList(head);
     traverseList(head);
-    // searchNode(head, 495);
+    searchNode(head, 495);
 
     return 0;
 }

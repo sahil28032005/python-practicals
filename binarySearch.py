@@ -1,9 +1,9 @@
 # [1,34,56,78,90]
-array=list()
-length=int(input("enter th length of the array"))
+array = list()
+length = int(input("enter th length of the array"))
 
 for i in range(length):
-    data=int(input("enter the element"))
+    data = int(input("enter the element"))
     array.append(data)
 
 
@@ -22,25 +22,43 @@ array.sort()
 #     print(array[i])
 
 
-        
-key=int(input("enter key to search inside array"))
-def binarySearch(array,low,high,key):
-    noOfComparisons=0;
-    found=False
-    while(low<=high):
-        mid=int((low+high)/2)
-        noOfComparisons+=1;
-        if array[mid]==key:
-            found=True
-            print("element found via taking",noOfComparisons,"number of comparisons")
-            break
-        elif key> array[mid]:
-            low=mid+1
-        else:
-            high=mid-1
-    if not found:
-        print("element not found")
+key = int(input("enter key to search inside array"))
 
 
+# def binarySearch(array, low, high, key):
+#     noOfComparisons = 0
+#     found = False
+#     while low <= high:
+#         mid = int((low + high) / 2)
+#         noOfComparisons += 1
+#         if array[mid] == key:
+#             found = True
+#             print("element found via taking", noOfComparisons, "number of comparisons")
+#             break
+#         elif key > array[mid]:
+#             low = mid + 1
+#         else:
+#             high = mid - 1
+#     if not found:
+#         print("element not found")
 
-binarySearch(array,0,length-1,key)
+
+def recurSiveBinarySearch(list, low, high, key):
+     if low>high:
+        print("your element not found")
+        return False
+     mid = int((low + high) / 2)
+     if list[mid] == key:
+        return mid
+     elif key <list[mid]:
+        return recurSiveBinarySearch(list, low, mid - 1, key)
+     elif key >list[mid]:
+        return recurSiveBinarySearch(list, mid + 1, high, key)
+     
+
+foundIndex=recurSiveBinarySearch(array,0,length-1,key)
+if(foundIndex):
+   print(f"element found at index number {foundIndex}")
+
+# print(array)
+# binarySearch(array, 0, length - 1, key)
