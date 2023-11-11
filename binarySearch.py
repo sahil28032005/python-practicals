@@ -1,4 +1,4 @@
-# [1,34,56,78,90]
+
 array = list()
 length = int(input("enter th length of the array"))
 
@@ -24,7 +24,7 @@ array.sort()
 
 key = int(input("enter key to search inside array"))
 
-
+# [1,34,56,78,90,99,999]
 # def binarySearch(array, low, high, key):
 #     noOfComparisons = 0
 #     found = False

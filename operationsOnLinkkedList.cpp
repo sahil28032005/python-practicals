@@ -16,25 +16,28 @@ public:
 Node *createFirstNode(int data, Node *head)
 {
     Node *node = new Node(data);
-    head = node;
-    return head;
+    // head = node;//try after removing this sentence
+    return node;
 }
 Node *insertAtTail(Node *head, int data)
 {
-    Node *node = new Node(data);
+    Node *actualHead = head;
+
     if (head == NULL)
     {
-        return createFirstNode(data, node);
+        return createFirstNode(data, head);
     }
     else
     {
+        Node *node = new Node(data);
         while (head->next != NULL)
         {
             head = head->next;
         }
         //  cout<<head->data<< endl;
         head->next = node;
-        }
+    }
+    return actualHead;
 }
 void traverseList(Node *head)
 {
@@ -47,17 +50,18 @@ void traverseList(Node *head)
 }
 Node *insertAtBeginning(Node *head, int data)
 {
-    Node *node = new Node(data);
+
     if (head == NULL)
     {
-        return createFirstNode(data, node);
+        return createFirstNode(data, head);
     }
     else
     {
+        Node *node = new Node(data);
         node->next = head;
-        head = node;
+        // head = node;
+        return node;
     }
-    return head;
 }
 int findLength(struct Node *head)
 {
@@ -95,7 +99,7 @@ Node *insertAtIndex(int index, int data, Node *head)
 }
 void searchNode(Node *head, int key)
 {
-    while (head->next != NULL)
+    while (head!= NULL)
     {
         if (head->data == key)
         {
@@ -130,16 +134,19 @@ int main()
     traverseList(head);
     head = insertAtTail(head, 17);
     traverseList(head);
-    head = insertAtBeginning(head, 56);
-    insertAtIndex(3, 455, head); // 56 12 17 455
-    insertAtIndex(2, 43, head);  // 56 12 43 17 455
-    insertAtIndex(1, 495, head); // 56 495 12 43 17 455
-    cout << "before sortings..." << endl;
+    head = insertAtTail(head, 17);
     traverseList(head);
-    cout << "after sortings..." << endl;
-    sortLinkedList(head);
+    head = insertAtTail(head, 17);
     traverseList(head);
-    searchNode(head, 495);
+    head = insertAtTail(head, 1);
+    traverseList(head);
+    head = insertAtBeginning(head, 600);
+    head = insertAtBeginning(head, 600);
+    head = insertAtBeginning(head, 6070);
+    traverseList(head);
+    searchNode(head,6070);
+    // sortLinkedList(head);
+    // traverseList(head);
 
     return 0;
 }
