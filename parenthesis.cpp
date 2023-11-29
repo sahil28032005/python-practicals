@@ -14,6 +14,7 @@ public:
 };
 class StackOperations
 {
+private:
 public:
     Stack<char> *s;
     void createStack(int size);
@@ -27,7 +28,6 @@ public:
 void StackOperations::createStack(int size)
 {
     s = new Stack<char>(size);
-    // cout << s->size;
     s->arr = new char[s->size]; // i thin this will allocate dynamic mempory another approach using malloc
 }
 bool StackOperations::isEmpty()
@@ -74,27 +74,24 @@ bool ::StackOperations::isWellParenthesized(string exp)
         }
         else if (((s->top) >= 0) && (s->arr[s->top] == '(' && exp[i] == ')' || s->arr[s->top] == '[' && exp[i] == ']' || s->arr[s->top] == '{' && exp[i] == '}'))
         {
-            //    cout<<"fould closing"<<endl;
-            if (isEmpty())
-            {
-            }
-            else
-            {
-                popFromStack();
-            }
+            popFromStack();
         }
         else if (exp[i] == ')' || exp[i] == ']' || exp[i] == '}')
         {
-            pushIntoStack(exp[i]);
+            // pushIntoStack(exp[i]); this can't be prefered because we only pushing opening brackets but it worked!
+            cout << "not well parenthesized<<endl";
+            return false;
         }
     }
     if (isEmpty())
     {
-        cout << "tuze expression well parenthesized ahe..." << endl;
+        cout << "your expression is well parenthesized..." << endl;
+        return true;
     }
     else
     {
-        cout << "tuze expression well parenthesized nahi" << endl;
+        cout << "not well parenthesized...." << endl;
+        return false;
     }
 }
 
@@ -105,7 +102,7 @@ int main()
     // stp.pushIntoStack('c');
     // stp.pushIntoStack('d');
     // stp.pushIntoStack('g');
-    stp.isWellParenthesized("");
+    stp.isWellParenthesized("{{{{{[(a+b)");
     stp.viaSualizeStack();
 
     return 0;
