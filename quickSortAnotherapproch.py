@@ -39,7 +39,7 @@ def quickSort(array, low, high):
 		quickSort(array, partitionIndex + 1, high)
 
 
-data = [1, 7, 4, 1, 10, 9, -2]
+data = [1, 7, 4, 1, 10, 9,5]
 print("Unsorted Array:")
 print(data)
 

@@ -80,6 +80,7 @@ bool ::StackOperations::isWellParenthesized(string exp)
         {
             // pushIntoStack(exp[i]); this can't be prefered because we only pushing opening brackets but it worked!
             cout << "not well parenthesized<<endl";
+            
             return false;
         }
     }
@@ -102,7 +103,7 @@ int main()
     // stp.pushIntoStack('c');
     // stp.pushIntoStack('d');
     // stp.pushIntoStack('g');
-    stp.isWellParenthesized("{{{{{[(a+b)");
+    stp.isWellParenthesized("(})");
     stp.viaSualizeStack();
 
     return 0;

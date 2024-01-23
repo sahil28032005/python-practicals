@@ -70,39 +70,62 @@ void SetOperations::traverseSets(Node *head)
 void SetOperations::unionOfsets(Node *head1, Node *head2)
 {
     int i = 0;
-    string a[getLength(head1) + getLength(head2)];
-    while (head1 != NULL && head2 != NULL)
+    string arr[getLength(head1) + getLength(head2)];
+    // while (head1 != NULL && head2 != NULL)
+    // {
+    //     if (head1->studentName == head2->studentName)
+    //     {
+    //         a[i] = head1->studentName;
+    //         head1 = head1->next;
+    //         head2 = head2->next;
+    //         i++;
+    //     }
+    //     else
+    //     {
+    //         a[i] = head1->studentName;
+    //         head1 = head1->next;
+    //         i++;
+    //     }
+    // }
+    // while (head1 != NULL)
+    // {
+    //     a[i] = head1->studentName;
+    //     i++;
+    //     head1 = head1->next;
+    // }
+    // while (head2 != NULL)
+    // {
+    //     a[i] = head2->studentName;
+    //     i++;
+    //     head2 = head2->next;
+    // }
+    // cout << endl;
+    i = 0;
+    for (Node *a = head2; a != NULL; a = a->next)
     {
-        if (head1->studentName == head2->studentName)
+        arr[i] = a->studentName;
+        i++;
+    }
+    for (Node *a = head1; a != NULL; a = a->next)
+    {
+        bool found = false;
+        for (Node *b = head2; b != NULL; b = b->next)
         {
-            a[i] = head1->studentName;
-            head1 = head1->next;
-            head2 = head2->next;
+            if (a->studentName == b->studentName)
+            {
+                found = true;
+            }
+        }
+        if (!found)
+        {
+            arr[i] = a->studentName;
             i++;
         }
-        else
-        {
-            a[i] = head1->studentName;
-            head1 = head1->next;
-            i++;
-        }
     }
-    while (head1 != NULL)
-    {
-        a[i] = head1->studentName;
-        i++;
-        head1 = head1->next;
-    }
-    while (head2 != NULL)
-    {
-        a[i] = head2->studentName;
-        i++;
-        head2 = head2->next;
-    }
-    cout << endl;
+
     for (int i = 0; i < 8; i++)
     {
-        cout << a[i] << endl;
+        cout << arr[i] << endl;
     }
 }
 void SetOperations::intersection(Node *head1, Node *head2)
@@ -163,15 +186,17 @@ int main()
 {
     Node *head = NULL;
     Node *head2 = NULL;
-    cout << "enter the number of students in list1 and list2" << endl;
+    cout << "enter the number of students in list1" << endl;
     int noOfstd = 0;
     int nostd2 = 0;
-    cin >> noOfstd >> nostd2;
+    cin >> noOfstd;
+    cout << "enter the number of students in  list2" << endl;
+    cin >> nostd2;
     SetOperations spt;
     head = spt.takeInput(noOfstd);
     head2 = spt.takeInput(nostd2);
     // spt.traverseSets(head);
     // spt.traverseSets(head2);
-    spt.differenceOfsets(head, head2);
+    spt.unionOfsets(head, head2);
     return 0;
 }

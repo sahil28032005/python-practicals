@@ -1,84 +1,125 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-class queue
-{
-public:
-    int size;
-    int front, rear;
-    string *arr=new string[size];
-    queue(int size)
-    {
-        // cout<<"size: "<<size<<endl;
-        this->front = -1;
-        this->rear = -1;
+const int N=10;
 
-        this->size = size;
-    }
+class priorityQ
+{
+  int front, rear;
+  int data_element[N];
+  int priority[N];
+  
+  public:
+  priorityQ()
+  {
+      front=rear=-1;
+  }
+  void enqueue(int x,int pr)
+  {
+      if(rear==N-1)
+      {
+          cout<<"Queue is Full!"<<endl;
+          return;
+      }
+      else if(front==-1 && rear==-1)
+      {
+          front=rear=0;
+          data_element[rear]=x;
+          priority[rear]=pr;
+      }
+      else
+      {
+          int i;
+          for(i=rear;i>=front;i--)
+          {
+              if(pr>=priority[i])
+              {
+                  data_element[i+1]=data_element[i];
+                  priority[i+1]=priority[i];
+              }
+              else
+              {
+                  break;
+              }
+          }
+          data_element[i+1]=x;
+          priority[i+1]=pr;
+          rear++;
+          cout<<"Element Enquequed"<<endl;
+      }
+  }
+  void dequeue()
+  {
+      int temp,temp1;
+      if(front==-1 && rear==-1)
+      {
+          cout<<"Queue is Empty!"<<endl;
+          return;
+      }
+      else if(front==rear)
+      {
+          temp=data_element[front];
+          temp1=priority[front];
+          front=rear=-1;
+      }
+      else
+      {
+          temp=data_element[front];
+          temp1=priority[front];
+          front++;
+      }
+      cout<<"\n Element:"<<temp<<" with priority :"<<temp1<<" dequequed"<<endl;
+  }
+  void display()
+  {
+      if(front==-1 && rear==-1)
+      {
+          cout<<"Queue is empty!"<<endl;
+      }
+      else
+      {
+          cout<<"(Element Priority):"<<endl;
+          for(int i=front;i<=rear;i++)
+          {
+              cout<<"("<<data_element[i]<<","<<priority[i]<<")"<<endl;
+          }
+      }
+  }
+  
 };
-class queueOperations
-{
-public:
-    queue *q = new queue(10);
-    void addJob(string job);
-    void visualizeJobQueue();
-    bool isFull();
-    bool isEmpty();
-    void dequeue();
-};
-void queueOperations::dequeue(){
-  if(q->front==-1)
-}
-void queueOperations::addJob(string job)
-{
-    if (isFull())
-    {
-        cout << "queue full delete some jobs" << endl;
-    }
-    else if (q->front == -1 && q->rear == -1)
-    {
-        q->front++;
-        q->arr[q->rear + 1] = job;
-        q->rear++;
-        cout << "job added" << endl;
-    }
-    else
-    {
-        q->arr[q->rear + 1] = job;
-        q->rear++;
-        cout << "job added" << endl;
-    }
-}
-void queueOperations::visualizeJobQueue()
-{
-    for (int i = 0; i < q->size; i++)
-    {
-        cout << "|" << q->arr[i] << "|"
-             << " ";
-    }
-}
-bool queueOperations::isFull()
-{
-    return q->rear == q->size - 1 && q->front == 0 ? true : false;
-}
-bool queueOperations::isEmpty()
-{
-    return q->front == -1 && q->rear == -1 ? true : false;
-}
 int main()
 {
-    queueOperations qop;
-    qop.addJob("print document");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    qop.addJob("request drivers");
-    // qop.addJob("request drivers");
-    qop.visualizeJobQueue();
+    priorityQ obj;
+    int ch;
+    int x,pr;
+    do
+    {
+        cout<<"\nEnter option no. to perform operation on Priority Queue(Ascending):"<<endl;
+        cout<<"Enter 0 for exit"<<endl;
+        cout<<"1. Enqueue"<<endl;
+        cout<<"2. Dequeue "<<endl;
+        cout<<"3. Display"<<endl;
+        cin>>ch;
+        switch(ch)
+        {
+            case 0:
+            break;
+            case 1:
+                cout<<"Enter Element:"<<endl;
+                cin>>x;
+                cout<<"Enter Priority:"<<endl;
+                cin>>pr;
+                obj.enqueue(x,pr);
+                break;
+            case 2:
+                obj.dequeue();
+                break;
+            case 3:
+                obj.display();
+                break;
+            default:
+                cout<<"Enter the valid option!"<<endl;
+                break;
+        }
+    }while(ch!=0);
     return 0;
 }
