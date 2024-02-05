@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
 class BinaryNode
 {
 public:
@@ -21,12 +20,13 @@ public:
     {
         if (node != NULL)
         {
-            cout << node->data<<" ";
+            cout << node->data << " ";
             preOrder(node->left);
             preOrder(node->right);
         }
     }
 };
+
 int main()
 {
     BinaryNode *n0 = new BinaryNode(1); // root node
@@ -45,13 +45,13 @@ int main()
     n1->left = n3;
     n1->right = n4;
 
-    n4->left=n6;
-    n4->right=n7;
+    n4->left = n6;
+    n4->right = n7;
 
     n2->right = n5;
 
     n5->left = n8;
-    
+
     Traversal t;
     t.preOrder(n0);
     return 0;
