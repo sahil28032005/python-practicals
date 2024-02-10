@@ -9,7 +9,8 @@ class Record:
         self.value = value
 
 
-hashT = [-1] * size
+# hashT = [-1] * size
+hashT = [Record(-1, "EMPTY") for _ in range(size)]
 
 
 def linear_prob(obj):
@@ -20,12 +21,11 @@ def linear_prob(obj):
             print("inserted..")
             if i > 0:
                 for j in range(size):
-                    if (
-                        hashT[((obj.data % size) + j) % size].chain == -1
-                        and hashT[obj.data % size].data % size
-                        == hashT[((obj.data % size) + j)].data % size
-                    ):
-                        hashT[((obj.data % size) + j) % size].chain = index
+                    hash = obj.data % size + j
+                    if hashT[hash % size].chain == -1 and hashT[#getting error here
+                        obj.data % size+j
+                    ].data % size == (hashT[index].data % size) and index!=hash:
+                        hashT[hash % size].chain = index
                         break
 
             return
@@ -43,7 +43,16 @@ def delete(key):
                 while hashT[index].chain != -1:
                     hashT[index].data = hashT[hashT[index].chain].data
                     hashT[index].chain = hashT[hashT[index].chain].chain
+                    hashT[index].value = hashT[hashT[index].chain].value
                     index = hashT[index].chain
+                hashT[index].data = -1
+                hashT[index].value = "EMPTY"
+                HashT[index].chain = -1
+                return
+            else:
+                hashT[index].data = -1
+                hashT[index].value = "EMPTY"
+                return
 
         else:
             index = hashT[index].chain
