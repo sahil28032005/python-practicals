@@ -1,37 +1,38 @@
 # chaining using open hashing without replacement
 size = int(input("enter size of your database"))
 
-
 class Record:
     def __init__(self, data, value, chain=-1):
         self.data = data
         self.chain = chain
         self.value = value
 
-
-# hashT = [-1] * size
 hashT = [Record(-1, "EMPTY") for _ in range(size)]
-
 
 def linear_prob(obj):
     for i in range(size):
         index = ((obj.data % size) + i) % size
-        if hashT[index] == -1:
+        if hashT[index].data == -1:
             hashT[index] = obj
             print("inserted..")
             if i > 0:
                 for j in range(size):
                     hash = obj.data % size + j
-                    if hashT[hash % size].chain == -1 and hashT[#getting error here
-                        obj.data % size+j
-                    ].data % size == (hashT[index].data % size) and index!=hash:
+                    if (
+                        hashT[hash % size].chain == -1
+                        and hashT[  # getting error here
+                            (obj.data % size + j) % size
+                        ].data
+                        % size
+                        == (hashT[index].data % size)
+                        and index != hash
+                    ):
                         hashT[hash % size].chain = index
                         break
 
             return
 
     print("no place to insert")
-
 
 def delete(key):
     index = key % size
@@ -42,12 +43,13 @@ def delete(key):
             if hashT[index].chain != -1:
                 while hashT[index].chain != -1:
                     hashT[index].data = hashT[hashT[index].chain].data
-                    hashT[index].chain = hashT[hashT[index].chain].chain
+                    # hashT[index].chain = hashT[hashT[index].chain].chain
                     hashT[index].value = hashT[hashT[index].chain].value
                     index = hashT[index].chain
                 hashT[index].data = -1
                 hashT[index].value = "EMPTY"
-                HashT[index].chain = -1
+                hashT[index].chain = -1
+                hashT[index - 1].chain = -1
                 return
             else:
                 hashT[index].data = -1

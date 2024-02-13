@@ -13,6 +13,20 @@ public:
         this->right = NULL;
     }
 };
+void inOrderTraversal(Node *root)
+{
+    if (root == NULL)
+        return;
+
+    // First recur on left child
+    inOrderTraversal(root->left);
+
+    // Then print the data of node
+    cout << root->data << " ";
+
+    // Now recur on right child                                                                                                                                                                                                                                                                                                                                                  
+    inOrderTraversal(root->right);
+}
 Node *findCorrectPos(Node *root, int data)
 {
     if (root == NULL)
@@ -32,7 +46,7 @@ Node *findCorrectPos(Node *root, int data)
     }
     return root;
 }
-void takeInput(int data, Node *root)
+Node * takeInput(int data, Node *root)
 {
     while (data != -1)
     {
@@ -40,6 +54,7 @@ void takeInput(int data, Node *root)
         cout << "insert data to insert in BST" << endl;
         cin >> data;
     }
+    return root;
 }
 
 int main()
@@ -57,8 +72,10 @@ int main()
             cout << "enter data to insert into BST" << endl;
             int data;
             cin >> data;
-            takeInput(data, n);
+            n=takeInput(data, n);
             break;
+        case 3:
+           inOrderTraversal(n);
 
         case 4:
             break;
