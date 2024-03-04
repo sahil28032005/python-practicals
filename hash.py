@@ -40,6 +40,15 @@ def search(tele_no):
            continue
          
      print("not found")
+def printHashTable():
+   print("INDEX   DATA ")
+        for i in range(size):
+           print(
+                    "{:<7d} {:<7d}".format(
+                        i, hashT[i]
+                  )
+                )
+  
 
 while(1):
   choise=int(input("Enter 1 for insert data using linear probing\nEnter 2 for insert data using quadratic quadratic probing\nEnter 3 for search record\nEnter 4 for exit\n"))   
